@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  gamehub:
+    image: wam07/gamehub-v7:latest
+    container_name: gamehub-web
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI=mongodb://db:27017/gamehub
+    depends_on:
+      - db
+  db:
+    image: mongo:latest
+    container_name: gamehub-db
+    restart: always
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
