@@ -33,13 +33,14 @@ app.use('/api/v1/auth', auth);
 app.use('/api/v1/games', games);
 app.use('/api/v1/reviews', reviews);
 
+// Se
 // Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
     // 1. Static folder for assets
     app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-    // 2. The catch-all route - Named wildcard for Node v24/path-to-regexp compatibility
-    app.get('/:any*', (req, res) => {
+    // 2. The Catch-all: Using a raw RegExp /.*/ bypasses the strict string parser entirely!
+    app.get(/.*/, (req, res) => {
         res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
     });
 } else {
@@ -47,7 +48,6 @@ if (process.env.NODE_ENV === 'production') {
         res.send('API is running...');
     });
 }
-
 const PORT = process.env.PORT || 5000;
 
 // Explicitly bind to 0.0.0.0 to allow Docker bridge networking
