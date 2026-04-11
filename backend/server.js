@@ -52,5 +52,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`));
-// DevOps Assignment Update
+// Force the server to listen on 0.0.0.0 (all network interfaces)
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+});
