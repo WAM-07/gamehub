@@ -35,12 +35,14 @@ app.use('/api/v1/games', games);
 app.use('/api/v1/reviews', reviews);
 
 // Serve frontend in production
+// Serve frontend in prod
+// Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('../frontend/dist'));
+    app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-    const path = require('path');
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, '../frontend', 'dist', 'index.html'));
+    // Updated catch-all route for compatibility with newer Express/Node
+    app.get('(.*)', (req, res) => {
+        res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
     });
 } else {
     app.get('/', (req, res) => {
@@ -51,3 +53,4 @@ if (process.env.NODE_ENV === 'production') {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`));
+// DevOps Assignment Update
