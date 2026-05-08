@@ -18,8 +18,7 @@ def browser():
     chrome_options.add_argument("--disable-dev-shm-usage") 
     chrome_options.add_argument("--window-size=1920,1080")
     
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    driver = webdriver.Chrome(options=chrome_options)
     
     driver.implicitly_wait(5) # Wait up to 5 seconds for elements to appear
     yield driver
