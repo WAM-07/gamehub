@@ -13,4 +13,4 @@ COPY test_gamehub.py .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["pytest", "test_gamehub.py", "-v"]
+CMD ["pytest", "test_gamehub.py", "-v", "--tb=no"]
